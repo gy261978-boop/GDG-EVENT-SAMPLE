@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDG GU DevFest Event Page</title>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+
+            --primary-blue: #4285F4;
+            --primary-red: #EA4335;
+            --primary-green: #34A853;
+            --primary-yellow: #FBBC05;
+            --accent-purple: #8E44AD;
+
+
+            --bg-card: #FFFFFF;
+
+            --bg-registration: rgb(244, 252, 253);
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --border-color: #E2E8F0;
+            --shadow-color: rgba(30, 41, 59, 0.1);
+
+            --bg-image: url('developers.png');
+            --bg-overlay: rgba(255, 255, 255, 0.35);
+        }
+
+
+        html.dark {
+
+            --bg-card: rgb(3, 11, 32);
+            --text-primary: #E2E8F0;
+            --bg-registration: rgb(3, 11, 32);
+            --text-secondary: #94A3B8;
+            --border-color: #334155;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --bg-overlay: rgba(0, 0, 0, 0.45);
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s, color 0.5s, border-color 0.5s, box-shadow 0.5s;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: var(--bg-body);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 800;
+        }
+
+        #event h1 {
+            color: var(--body-track-dark);
+            transition: color 0.35s ease;
+        }
+
+        html.dark #event h1 {
+            color: white;
+        }
+
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 4px var(--shadow-color);
+            backdrop-filter: blur(5px);
+        }
+
+        html.dark header {
+            background-color: rgba(15, 23, 42, 0.95);
+        }
+
+        header .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        header nav a {
+            margin-left: 2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        header nav a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            padding: 0.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        #theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        html.dark #theme-toggle:hover {
+            background-color: var(--bg-card);
+        }
+
+        #theme-toggle svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        #theme-toggle .sun-icon {
+            color: white;
+        }
+
+        html.dark #theme-toggle .moon-icon {
+            display: none;
+        }
+
+        html:not(.dark) #theme-toggle .sun-icon {
+            display: none;
+        }
+
+        #event {
+            text-align: center;
+            padding-top: 5rem;
+            padding-bottom: 6rem;
+            border-bottom: 8px solid var(--border-color);
+        }
+
+        #event h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        #event h1 .blue {
+            color: var(--primary-blue);
+        }
+
+        #event h1 .red {
+            color: var(--primary-red);
+        }
+
+        #event h1 .purple {
+            color: var(--accent-purple);
+        }
+
+        #event p {
+            font-size: 4vh;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+        }
+
+
+        #countdown-timer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            #countdown-timer {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .timer-unit {
+            padding: 1.5rem;
+            background-color: var(--bg-card);
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-bottom: 4px solid;
+            color: var(--text-primary);
+        }
+
+        html.dark .timer-unit {
+            background-color: var(--bg-card);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .timer-unit .value {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .timer-unit .value {
+                font-size: 4rem;
+            }
+        }
+
+        .timer-unit .label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .timer-blue {
+            border-color: var(--primary-blue);
+        }
+
+        .timer-green {
+            border-color: var(--primary-green);
+        }
+
+        .timer-yellow {
+            border-color: var(--primary-yellow);
+        }
+
+        .timer-red {
+            border-color: var(--primary-red);
+        }
+
+        .timer-blue .value {
+            color: var(--primary-blue);
+        }
+
+        .timer-green .value {
+            color: var(--primary-green);
+        }
+
+        .timer-yellow .value {
+            color: var(--primary-yellow);
+        }
+
+        .timer-red .value {
+            color: var(--primary-red);
+        }
+
+
+        #highlights {
+            background-color: var(--bg-dark-primary);
+            text-align: center;
+            font-size: 5vh;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .highlight-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .highlight-card {
+            padding: 2rem;
+            background-color: var(--bg-card);
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            border-top: 8px solid;
+            text-align: left;
+            transform: scale(1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .highlight-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 20px -5px var(--shadow-color);
+        }
+
+        html.dark .highlight-card {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .highlight-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .highlight-card span {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .card-blue {
+            border-color: var(--primary-blue);
+        }
+
+        .card-green {
+            border-color: var(--primary-green);
+        }
+
+        .card-yellow {
+            border-color: var(--primary-yellow);
+        }
+
+        .card-blue svg {
+            color: var(--primary-blue);
+        }
+
+        .card-green svg {
+            color: var(--primary-green);
+        }
+
+        .card-yellow svg {
+            color: var(--primary-yellow);
+        }
+
+        .card-blue span {
+            color: var(--primary-blue);
+        }
+
+        .card-green span {
+            color: var(--primary-green);
+        }
+
+        .card-yellow span {
+            color: var(--primary-yellow);
+        }
+
+
+        #schedule {
+            text-align: center;
+            background-color: var(--bg-body);
+        }
+
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding-top: 2rem;
+        }
+
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--border-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-container::after {
+                left: 1rem;
+            }
+        }
+
+        .timeline-item {
+            padding: 10px 0;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+
+        .timeline-item.left {
+            left: 0;
+            padding-right: 2.5rem;
+        }
+
+
+        .timeline-item.right {
+            left: 50%;
+            padding-left: 2.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                width: 100%;
+                padding-left: 3rem;
+                padding-right: 10px;
+            }
+
+            .timeline-item.right {
+                left: 0;
+            }
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            z-index: 1;
+            top: 25px;
+            border: 4px solid var(--bg-body);
+        }
+
+        html.dark .timeline-dot {
+            border: 4px solid var(--bg-body);
+        }
+
+
+
+        .timeline-item.left .timeline-dot {
+            right: -12px;
+        }
+
+        .timeline-item.right .timeline-dot {
+            left: -12px;
+        }
+
+        @media (max-width: 768px) {
+
+            .timeline-dot {
+                left: 0 !important;
+                margin-left: 0;
+            }
+        }
+
+
+        .timeline-content {
+            padding: 1.5rem;
+            background-color: var(--bg-card);
+            position: relative;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            text-align: left;
+            border-left: 4px solid;
+        }
+
+
+        .timeline-content .time {
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+
+        .dot-blue {
+            background-color: var(--primary-blue);
+        }
+
+        .dot-red {
+            background-color: var(--primary-red);
+        }
+
+        .dot-green {
+            background-color: var(--primary-green);
+        }
+
+        .dot-yellow {
+            background-color: var(--primary-yellow);
+        }
+
+        .border-blue {
+            border-color: var(--primary-blue);
+        }
+
+        .border-red {
+            border-color: var(--primary-red);
+        }
+
+        .border-green {
+            border-color: var(--primary-green);
+        }
+
+        .border-yellow {
+            border-color: var(--primary-yellow);
+        }
+
+
+
+        #speakers {
+            text-align: center;
+        }
+
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 1024px) {
+            .speaker-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .speaker-card {
+
+            background: none;
+            padding: 0;
+            border-radius: 1rem;
+            box-shadow: none;
+            position: relative;
+            height: 350px;
+            perspective: 1000px;
+        }
+
+        .speaker-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .speaker-card:hover .speaker-inner {
+            transform: rotateY(180deg);
+        }
+
+        .speaker-front,
+        .speaker-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background-color: var(--bg-card);
+            box-shadow: 0 5px 10px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .speaker-back {
+            transform: rotateY(180deg);
+            background-color: var(--primary-blue);
+            color: white;
+            box-shadow: 0 5px 10px rgba(66, 133, 244, 0.5);
+        }
+
+        .speaker-back h5 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker-back p {
+            color: white;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .speaker-back .track {
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+
+        .speaker-avatar {
+            width: 8rem;
+            height: 8rem;
+            margin: 0 auto 1rem;
+            border-radius: 9999px;
+            background-color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            border: 4px solid var(--bg-card);
+        }
+
+        .speaker-front h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .speaker-front p {
+            color: var(--primary-green);
+        }
+
+
+        #register {
+
+            background: transparent;
+            width: 80vh;
+            align-items: center;
+            margin-left: 65vh;
+        }
+
+        #register h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        #register .subtitle {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .registration-box {
+            max-width: 600px;
+            margin: 0 auto;
+
+            background-color: rgba(3, 37, 76, 0.72);
+            color: white;
+            padding: 2rem;
+            border-radius: 6px;
+            box-shadow: 0 12px 30px rgba(3, 37, 76, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
+        }
+
+        .success-message {
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background-color: rgba(52, 168, 83, 0.15);
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(52, 168, 83, 0.2);
+        }
+
+        .success-message h3 {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message h3 svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.25);
+            outline: none;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--primary-blue);
+            color: white;
+            font-weight: 700;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(66, 133, 244, 0.3);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--primary-red);
+            transform: scale(1.01);
+            box-shadow: 0 6px 8px rgba(234, 67, 53, 0.4);
+        }
+
+
+        .venue-content {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .venue-content {
+                flex-direction: row;
+                padding: 2.5rem;
+            }
+        }
+
+        html.dark .venue-content {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        }
+
+        .map-placeholder {
+            flex: 1;
+            min-height: 300px;
+            background-color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .address-details {
+            flex: 1;
+        }
+
+        .address-details svg {
+            margin-bottom: 1rem;
+        }
+
+        .address-details h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .address-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .address-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .address-details .bold-text {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .address-details .ml-2-5 {
+            margin-left: calc(1.25rem + 0.75rem);
+            display: block;
+        }
+
+        .directions-button {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-red);
+            color: white;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .directions-button:hover {
+            background-color: #d13d30;
+        }
+
+        .directions-button svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+
+
+        footer {
+            background-color: var(--bg-card);
+            padding: 2.5rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        html.dark footer {
+            background-color: rgb(3, 11, 32);
+            border-top: none;
+        }
+
+        footer .logo-footer {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        footer .text-secondary {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        footer .social-links a {
+            margin: 0 0.75rem;
+            color: var(--text-primary);
+            transition: color 0.3s;
+        }
+
+        footer .social-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        footer .social-links svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        footer .copyright {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+
+        @media (max-width: 640px) {
+            #event h1 {
+                font-size: 3rem;
+            }
+
+            #event p {
+                font-size: 1rem;
+            }
+
+            .timer-unit {
+                padding: 1rem;
+            }
+
+            .timer-unit .value {
+                font-size: 2.5rem;
+            }
+
+            header nav {
+                display: none;
+            }
+
+            #speakers h2,
+            #highlights h2,
+            #register h2,
+            #schedule h2 {
+                font-size: 2rem;
+            }
+
+            .speaker-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .venue-content {
+                flex-direction: column;
+            }
+
+            .address-details h3 {
+                font-size: 1.5rem;
+            }
+
+            .address-details .ml-2-5 {
+                margin-left: 0;
+            }
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-content">
+
+            <div class="logo">
+                <h1>GDG GU DevFest</h1>
+            </div>
+
+            <nav class="desktop-nav">
+                <a href="#event">Event</a>
+                <a href="#highlights">Highlights</a>
+                <a href="#schedule">Agenda</a>
+                <a href="#speakers">Speakers</a>
+                <a href="#register">Register</a>
+                <a href="#venue">Venue</a>
+            </nav>
+
+            <button id="theme-toggle" onclick="toggleTheme()">
+                <i data-lucide="moon" class="moon-icon"></i>
+                <i data-lucide="sun" class="sun-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="event">
+            <div class="container">
+                <h1>
+                    GDG GU DevFest
+                    <br>2026
+                </h1>
+                <p>
+                    Innovate. Connect. Inspire. | March 15, 2026, 10:00 AM
+                </p>
+
+
+                <div id="countdown-timer">
+
+                    <div class="timer-unit timer-blue">
+                        <div id="days" class="value">00</div>
+                        <div class="label">Days</div>
+                    </div>
+
+                    <div class="timer-unit timer-green">
+                        <div id="hours" class="value">00</div>
+                        <div class="label">Hours</div>
+                    </div>
+
+                    <div class="timer-unit timer-yellow">
+                        <div id="minutes" class="value">00</div>
+                        <div class="label">Minutes</div>
+                    </div>
+
+                    <div class="timer-unit timer-red">
+                        <div id="seconds" class="value">00</div>
+                        <div class="label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="highlights">
+            <div class="container">
+                <h2 style="margin-bottom: 3rem;">What to Expect</h2>
+
+                <div class="highlight-grid">
+
+                    <div class="highlight-card card-blue">
+                        <i data-lucide="brain" style="width: 2.5rem; height: 2.5rem; margin-bottom: 1rem;"></i>
+                        <h3>Generative AI Workshop</h3>
+                        <p>Dive deep into modern GenAI frameworks and large language models. Learn to build your first
+                            RAG application.</p>
+                        <span>#MachineLearning</span>
+                    </div>
+
+
+                    <div class="highlight-card card-green">
+                        <i data-lucide="cloud" style="width: 2.5rem; height: 2.5rem; margin-bottom: 1rem;"></i>
+                        <h3>Google Cloud & Firebase</h3>
+                        <p>Explore serverless architecture, Firestore database, and secure hosting with Google Cloud
+                            Platform.</p>
+                        <span>#CloudComputing</span>
+                    </div>
+
+
+                    <div class="highlight-card card-yellow">
+                        <i data-lucide="smartphone" style="width: 2.5rem; height: 2.5rem; margin-bottom: 1rem;"></i>
+                        <h3>Modern App Development</h3>
+                        <p>Master the latest features of Flutter for building beautiful, natively compiled applications
+                            for mobile, web, and desktop.</p>
+                        <span>#MobileDev</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="schedule">
+            <div class="container">
+                <h2
+                    style="margin-bottom: 4rem; color: var(--bg-dark-primary);font-size: 6vh;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-weight: 900;">
+                    Event Agenda & Timeline</h2>
+
+                <div class="timeline-container">
+
+
+                    <div class="timeline-item left">
+                        <div class="timeline-dot dot-blue"></div>
+                        <div class="timeline-content border-blue">
+                            <div class="time">10:00 AM - 10:30 AM</div>
+                            <h4>Registration & Breakfast</h4>
+                            <p>Check-in, grab your swag bag, and network with fellow developers over coffee and light
+                                refreshments.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="timeline-item right">
+                        <div class="timeline-dot dot-red"></div>
+                        <div class="timeline-content border-red">
+                            <div class="time">10:30 AM - 11:30 AM</div>
+                            <h4>Inaugural Keynote: AI's Next Wave</h4>
+                            <p>Opening speech by Prof. Priya Mehta on the future of AI-driven development and the role
+                                of the GDG community.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="timeline-item left">
+                        <div class="timeline-dot dot-green"></div>
+                        <div class="timeline-content border-green">
+                            <div class="time">11:30 AM - 1:00 PM</div>
+                            <h4>Technical Session 1: Cloud & Data</h4>
+                            <p>Workshop on serverless functions and real-time data handling using Google Cloud Run and
+                                Firebase Firestore.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="timeline-item right">
+                        <div class="timeline-dot dot-yellow"></div>
+                        <div class="timeline-content border-yellow">
+                            <div class="time">1:00 PM - 2:00 PM</div>
+                            <h4>Lunch & GDG Connect</h4>
+                            <p>A catered lunch break. Use this time to connect with speakers, mentors, and partners at
+                                the exhibition booths.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="timeline-item left">
+                        <div class="timeline-dot dot-blue"></div>
+                        <div class="timeline-content border-blue">
+                            <div class="time">2:00 PM - 3:30 PM</div>
+                            <h4>Technical Session 2: GenAI & Flutter</h4>
+                            <p>Parallel tracks begin: RAG workshop with Gemini, and Advanced UI with Flutter 3.0+.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="timeline-item right">
+                        <div class="timeline-dot dot-red"></div>
+                        <div class="timeline-content border-red">
+                            <div class="time">3:30 PM - 4:00 PM</div>
+                            <h4>Closing Ceremony & Farewell</h4>
+                            <p>Q&A with the organizers, best speaker announcement, and final distribution of
+                                certifications and prizes.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="speakers">
+            <div class="container">
+                <h2
+                    style="margin-bottom: 3rem;font-size: 6vh;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-weight: 900;">
+                    Meet Our Speakers</h2>
+
+                <div class="speaker-grid">
+
+                    <div class="speaker-card">
+                        <div class="speaker-inner">
+                            <div class="speaker-front">
+                                <div class="speaker-avatar" style="background-color: var(--primary-blue);">AS</div>
+                                <h4>Dr. Anya Sharma</h4>
+                                <p style="color: var(--primary-green);">Cloud Architect, GDE</p>
+                            </div>
+                            <div class="speaker-back">
+                                <h5>Serverless Futures</h5>
+                                <p style="font-weight: 600;">Exploring the latest trends in Google Cloud Run and
+                                    advanced data management with Firestore.</p>
+                                <p class="track">(Track: Cloud & Infrastructure)</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="speaker-card">
+                        <div class="speaker-inner">
+                            <div class="speaker-front">
+                                <div class="speaker-avatar" style="background-color: var(--primary-yellow);">VR</div>
+                                <h4>Mr. Vishal Rao</h4>
+                                <p style="color: var(--primary-green);">Flutter GDE</p>
+                            </div>
+                            <div class="speaker-back"
+                                style="background-color: var(--primary-yellow); color: var(--text-primary); box-shadow: 0 5px 10px rgba(251, 188, 5, 0.5);">
+                                <h5 style="color: var(--text-primary);">Building Adaptive UIs</h5>
+                                <p style="font-weight: 600; color: var(--text-primary);">A deep dive into Flutter's new
+                                    rendering engine and adaptive widget design for cross-platform apps.</p>
+                                <p class="track" style="color: var(--text-primary);"> (Track: Mobile App Dev)</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="speaker-card">
+                        <div class="speaker-inner">
+                            <div class="speaker-front">
+                                <div class="speaker-avatar" style="background-color: var(--primary-red);">PM</div>
+                                <h4>Prof. Priya Mehta</h4>
+                                <p style="color: var(--primary-green);">GDG Organizer</p>
+                            </div>
+                            <div class="speaker-back"
+                                style="background-color: var(--primary-red); box-shadow: 0 5px 10px rgba(234, 67, 53, 0.5);">
+                                <h5>Community & Growth</h5>
+                                <p style="font-weight: 600;">How to leverage GDG resources and community-led development
+                                    to accelerate your tech career.</p>
+                                <p class="track">(Track: Career & Networking)</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="speaker-card">
+                        <div class="speaker-inner">
+                            <div class="speaker-front">
+                                <div class="speaker-avatar" style="background-color: var(--primary-green);">RP</div>
+                                <h4>Rohan Pradhan</h4>
+                                <p style="color: var(--primary-green);">ML Engineer</p>
+                            </div>
+                            <div class="speaker-back"
+                                style="background-color: var(--primary-green); box-shadow: 0 5px 10px rgba(52, 168, 83, 0.5);">
+                                <h5>RAG for Enterprises</h5>
+                                <p style="font-weight: 600;">Implementing Retrieval-Augmented Generation (RAG) using
+                                    Gemini and Vertex AI for custom enterprise solutions.</p>
+                                <p class="track">(Track: Generative AI)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="register">
+            <div class="container registration-box">
+                <h2>Secure Your Spot</h2>
+                <p class="subtitle">Registration is free and mandatory. Limited seats available!</p>
+
+                <div id="success-message" class="success-message" style="display: none;">
+                    <h3><i data-lucide="check-circle"></i> Registration Successful!</h3>
+                    <p>Thank cleaner-text-contentyou for registering. A confirmation email with event details has been
+                        simulated and sent to your address. We can't wait to see you!</p>
+                </div>
+
+
+                <form id="registration-form">
+
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required
+                            placeholder="Enter your professional email">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="college">College/Organization</label>
+                        <input type="text" id="college" name="college" required
+                            placeholder="Name of your institution/company">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="interest">Primary Interest Area</label>
+                        <select id="interest" name="interest" required>
+                            <option value="" disabled selected>Select an area</option>
+                            <option value="gen_ai">Generative AI</option>
+                            <option value="cloud_firebase">Cloud & Firebase</option>
+                            <option value="mobile_flutter">Mobile App Dev (Flutter)</option>
+                            <option value="web_dev">Web Development</option>
+                            <option value="data_science">Data Science/ML</option>
+                        </select>
+                    </div>
+
+
+                    <button type="submit">
+                        Complete Registration
+                    </button>
+                </form>
+            </div>
+        </section>
+
+
+        <section id="venue">
+            <div class="container" style="max-width: 600px;align-items: center;">
+                <div class="venue-content" style="align-items: center;">
+
+                 
+
+
+                    <div class="address-details">
+                        <i data-lucide="map-pin" style="width: 2rem; height: 2rem; color: var(--primary-yellow);"></i>
+                        <h3>Event Venue Address</h3>
+
+                        <div>
+                            <p class="bold-text">GDG Galgotias University</p>
+                            <div class="address-item">
+                                <i data-lucide="building" style="color: var(--primary-green);"></i>
+                                <span>Auditorium, C Block</span>
+                            </div>
+                            <div class="address-item">
+                                <i data-lucide="map" style="color: var(--primary-red);"></i>
+                                <span>Plot No. 2, Sector 17-A, Yamuna Expressway</span>
+                            </div>
+                            <span class="ml-2-5" style="color: var(--text-secondary); margin-top: -0.5rem;">Greater
+                                Noida, Uttar Pradesh 201310, India</span>
+                        </div>
+
+                        <a href="https://www.google.com/maps/search/?api=1&query=28.4595,77.5021" target="_blank" class="directions-button">
+                            <i data-lucide="navigation"></i> Open Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
+    </main>
+
+
+    <footer>
+        <div class="container">
+            <div class="logo-footer">
+                <span class="blue">GDG GU</span>
+                <span class="red">DevFest '26</span>
+            </div>
+            <p class="text-secondary">A community-driven event by GDG Galgotias University.</p>
+
+
+            <div class="social-links">
+                <a href="#" aria-label="Twitter" style="color: var(--primary-blue);">
+                    <i data-lucide="twitter"></i>
+                </a>
+                <a href="#" aria-label="YouTube" style="color: var(--primary-red);">
+                    <i data-lucide="youtube"></i>
+                </a>
+                <a href="#" aria-label="LinkedIn" style="color: var(--primary-blue);">
+                    <i data-lucide="linkedin"></i>
+                </a>
+                <a href="#" aria-label="Instagram" style="color: var(--text-secondary);">
+                    <i data-lucide="instagram"></i>
+                </a>
+            </div>
+
+            <p class="copyright">&copy; 2026 GDG Galgotias University. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+        <script src="script.js"></script>
+</body>
+
+</html>
